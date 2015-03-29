@@ -15,24 +15,25 @@ The canvas tells your browser how large a space to take up. For today's purposes
 ```
 <canvas id="drawing" style="width:1000px; height: 1000px"></canvas>
 ```
-Paper.js has a lot of built in geometrical objects. Let's start off with some simple lines.
+Let's start off with some simple lines.
 
-The canvas is basically a grid of 1000 x 1000 points, and for each shape you are going to tell it where to start off on that grid on the x and y axes.
+The canvas is basically a grid of 1000 x 1000 points. When making your own shape, you tell the shape where to sit on that grid, with the segments method, by passing in the points.
 
-Paper.js let's you build your own shapes through their Path object.
-Here's an example.
+You build your shapes through the Path class.
+Here's an example of how to make a line.
 
 ```
 var myPath = new Path({
-  segments: [[10,10], [100,500]],
+  segments: [[220,250], [230,500]],
   strokeColor: "black"
 });
+
 ```
 It's a pretty nice line, but not super exciting. Let's add a few more points to it.
 
 ```
 var myPath = new Path({
-  segments: [[10,10], [100,500], [200, 300]],
+  segments: [[220,250], [230,500], [300, 400]],
   strokeColor: "black"
 });
 ```
@@ -40,11 +41,23 @@ var myPath = new Path({
 We can close it into a shape with this simple method
 myPath.closed = true;
 
+Sweet triangle, but it's not very fun. Let's add some animation.
+
 ```
-var circle = new Path.Circle({
-  center: [200,200],
-  radius: 40,
-  strokeColor: "black",
-  strokeWidth: 5
-});
+function onFrame(event){
+  myPath.rotate(2);
+}
+
 ```
+
+How about faster?
+
+```
+function onFrame(event){
+  myPath.rotate(20);
+}
+
+```
+Okay, that might be a little crazy.
+
+Let's add some color to it.
