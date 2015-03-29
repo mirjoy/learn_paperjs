@@ -13,16 +13,14 @@ myPath.closed = true;
 
 // function onFrame(event){
 //   myPath.rotate(2);
-//   myPath.fillColor.hue += ;
+//   myPath.fillColor.hue += 1;
 // }
 
 var count = 50;
 
 var symbol = new Symbol(myPath);
 
-// Place the instances of the symbol:
 for (var i = 0; i < count; i++) {
-	// The center position is a random point in the view:
 	var center = Point.random() * view.size;
 	var placedSymbol = symbol.place(center);
 	placedSymbol.scale(i / count);
@@ -40,8 +38,9 @@ function onFrame(event) {
     // item.fillColor.hue += 1;
 		item.position.x += item.bounds.width / 15;
     item.rotate(2);
-    myPath.fillColor.hue += 1;
-    		// If the item has left the view on the right, move it back
+    // Change the color of all the triangles?
+    myPath.fillColor.hue += 0.02;
+    // If the item has left the view on the right, move it back
 		// to the left:
 		if (item.bounds.left > view.size.width) {
 			item.position.x = -item.bounds.width;

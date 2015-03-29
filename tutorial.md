@@ -61,21 +61,34 @@ function onFrame(event){
 
 ```
 
-How about a lot of triangles?
+How about 50 triangles? We can randomly place them across the screen and dynamically change their size using the Symbol class.
 
+To create a symbol from any item (an item is a line or shape or just about anything in Paper.js), just pass the item to the new Symbol constructor. When you create a symbol using an item, that item is automatically removed from the document.
+
+To place instances of the symbol in your project, you can call symbol.place(position) on it, with the position where you want to place it.
+
+[You can read more on working with Paper.js symbols.](http://paperjs.org/tutorials/project-items/working-with-symbols/)
 ```
 var count = 50;
 
 var symbol = new Symbol(myPath);
 
-// Place the instances of the symbol:
 for (var i = 0; i < count; i++) {
-	// The center position is a random point in the view:
 	var center = Point.random() * view.size;
 	var placedSymbol = symbol.place(center);
 	placedSymbol.scale(i / count);
 }
 
+```
+So the above does the following
+  * we specify we want 50 triangles
+  * turn myPath into a Symbol (which removes the original triangle from the page)
+  * randomly place each triangle using the symbol.place() method
+  * randomly size the triangles using the scale method
+
+Now we can animate all the triangles at once! Comments are left in the code to explain what is going on line by line, since this part gets tricky.
+
+```
 // The onFrame function is called up to 60 times a second:
 function onFrame(event) {
 	// Run through the active layer's children list and change
@@ -88,8 +101,9 @@ function onFrame(event) {
     // item.fillColor.hue += 1;
 		item.position.x += item.bounds.width / 15;
     item.rotate(2);
-    myPath.fillColor.hue += 1;
-    		// If the item has left the view on the right, move it back
+    // Change the color of all the triangles?
+    myPath.fillColor.hue += 0.02;
+    // If the item has left the view on the right, move it back
 		// to the left:
 		if (item.bounds.left > view.size.width) {
 			item.position.x = -item.bounds.width;
@@ -98,4 +112,4 @@ function onFrame(event) {
 }
 ```
 
-Okay, that's a little bit disco.
+Okay, that's fun.
